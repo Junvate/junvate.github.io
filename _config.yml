@@ -6,7 +6,7 @@ email: junchaoyou31@gmail.com
 description: "stay hungrt,stay foolish."
 keyword: "Junvate, Junvate Blog, 游竣超的博客"
 url: "http://junvate.github.io"          # your host, for absolute URL
-baseurl: "/junvate.github.io"      # for example, '/blog' if your blog hosted on 'host/blog'
+baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/junvate/junvate.github.io.git" # you code repository
 
 # Sidebar settings
