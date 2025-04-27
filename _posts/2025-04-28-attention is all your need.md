@@ -7,7 +7,7 @@ author:     Junvate
 header-img: img/post-bg-cook.jpg
 catalog: true
 tags:
-    - 期末复习
+    - 保研复习
 ---
 # 文献参考
 https://arxiv.org/pdf/1706.03762
