@@ -86,6 +86,7 @@ The Transformer allows for significantly more parallelization and can reach a ne
 ```
 
 ### Background
+```
 减少序列计算的目标也形成了神经GPU 字节网络，卷积序列to序列的基础，他们都用卷积神经网络作为基础的构建块，为所有的输入输出位置并行地计算隐藏特征
 The goal of reducing sequential computation also forms the foundation of the Extended Neural GPU [6], ByteNet [8] and ConvS2S [], all of which use convolutional neural networks as basic building block, computing hidden representations in parallel for all input and output positions. 
 
@@ -116,7 +117,7 @@ End-to-end memory networks are based on a recurrent attention mechanism instead 
 To the best of our knowledge, however, the Transformer is the first transduction model relying entirely on self-attention to compute representations of its input and output without using sequence-aligned RNNs or convolution.
 
 In the following sections, we will describe the Transformer,s motivate self-attention and discuss its advantages over models such as [7, 8] and [].
-
+```
 
 ## 词汇
 - dominant 主要的，主导的
