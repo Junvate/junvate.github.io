@@ -75,9 +75,6 @@ Recent work has achieved significant improvements in computational efficiency th
 The fundamental constraint of sequential computation, however, remains.Attention mechanisms have become an integral part of compelling sequence modeling and transduction models in various tasks, allowing modeling of dependencies without regard to their distance in
 the input or output sequences [2, 19]. 
 
-
-
-
 然而，除了少数情况，这种注意力机制都是和递归网络一起结合使用的。
 在这个工作中，我们发现Transformer，一个完全摒弃
 递归并且完全依赖注意力机制来绘制输入和输出的全局依赖关系的模型架构
@@ -87,6 +84,40 @@ In all but a few cases [27], however, such attention mechanisms are used in conj
 In this work we propose the Transformer, a model architecture eschewing recurrence and instead relying entirely on an attention mechanism to draw global dependencies between input and output.
 The Transformer allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained for as littie as twelve hours on eight P100 GPUs.
 ```
+
+### Background
+减少序列计算的目标也形成了神经GPU 字节网络，卷积序列to序列的基础，他们都用卷积神经网络作为基础的构建块，为所有的输入输出位置并行地计算隐藏特征
+The goal of reducing sequential computation also forms the foundation of the Extended Neural GPU [6], ByteNet [8] and ConvS2S [], all of which use convolutional neural networks as basic building block, computing hidden representations in parallel for all input and output positions. 
+
+在这些模型中，将任意两个输入输出位置的信号关联起来的操作数量随位置之间的距离增加，对于ConvS2S是线性增长，对于ByteNet则是对数增长
+In these models, the number of operations required to relate signals from two arbitrary input or output positions grows in the distance between positions, linearly for ConvS2S and logarithmically for ByteNet. 
+
+
+这使得学习在较远的位置之间的依赖关系变得更加困难。
+在Transformer中，这被减少到特定的操作数量，尽管由于平均注意力加权位置而降低了有效分辨率，我们通过3.2节中描述的多头注意力机制来抵消这种影响
+
+This makes it more difficult to learn dependencies between distant positions [2]. 
+In the Transformer this is reduced to a constant number of operations, albeit at the cost of reduced effective resolution due to averaging attention-weighted positions, an effect we counteract with Multi-Head Attention as described in section 3.2
+
+自注意力，有时被叫做内部注意力机制，是一种将单个序列不同位置相关联的注意力机制，用来计算序列的表示。
+Self-attention, sometimes called intra-attention is an attention mechanism relating different positions of a single sequence in order to compute a representation of the sequence. 
+
+自注意力已经被成功用来多种多样的任务例如阅读理解，抽象总结，文本构建和学习独立任务无关的句子表示。
+
+端到端的记忆力网络以递归注意力机制为基础而不是序列对齐的递归 并且在简单的语言问题回答和语言建模任务上已经表现出色
+Self-attention has been used successfully in a variety of tasks including reading comprehension, abstractive summarization,
+textual entailment and learning task-independent sentence representations。
+
+End-to-end memory networks are based on a recurrent attention mechanism instead of sequence-aligned recurrence and have been shown to perform well on simple-language question answering and language modeling tasks [34].
+
+然而，据我们所知，Transformer是第一个完全依赖于自注意力机制来计算输入输出表示的转译模型，而不需要序列对齐的RNN和卷积。
+在接下来的章节中，我们将描述Transformer，阐述自注意力机制的动机并且讨论它相对于其他模型的优势。
+
+To the best of our knowledge, however, the Transformer is the first transduction model relying entirely on self-attention to compute representations of its input and output without using sequence-aligned RNNs or convolution.
+
+In the following sections, we will describe the Transformer,s motivate self-attention and discuss its advantages over models such as [7, 8] and [].
+
+
 ## 词汇
 - dominant 主要的，主导的
 - transduction 转换 翻译 转译
@@ -119,3 +150,6 @@ The Transformer allows for significantly more parallelization and can reach a ne
 - without regard to 不需要考虑
 - In all but a few cases 除了少数情况
 - in conjunction with 与...一起
+- language modeling tasks 语言建模任务
+- to the best of our knowledge 据我们所知
+- motivate 激励激发 动机
