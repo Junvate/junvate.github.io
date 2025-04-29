@@ -76,12 +76,16 @@ The fundamental constraint of sequential computation, however, remains.Attention
 the input or output sequences [2, 19]. 
 
 
-In all but a few cases [27], however, such attention mechanisms 
-are used in conjunction with a recurrent network.
-In this work we propose the Transformer, a model architecture eschewing recurrence and instead
-relying entirely on an attention mechanism to draw global dependencies between input and output.
-The Transformer allows for significantly more parallelization and can reach a new state of the art in
-translation quality after being trained for as littie as twelve hours on eight P100 GPUs.
+
+
+然而，除了少数情况，这种注意力机制都是和递归网络一起结合使用的。
+在这个工作中，我们发现Transformer，一个完全摒弃
+递归并且完全依赖注意力机制来绘制输入和输出的全局依赖关系的模型架构
+Transformer允许更大的并行化并且通过在八个GPU训练约12个小时，翻译质量可以达到世界先进一流水平。
+
+In all but a few cases [27], however, such attention mechanisms are used in conjunction with a recurrent network.
+In this work we propose the Transformer, a model architecture eschewing recurrence and instead relying entirely on an attention mechanism to draw global dependencies between input and output.
+The Transformer allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained for as littie as twelve hours on eight P100 GPUs.
 ```
 ## 词汇
 - dominant 主要的，主导的
@@ -113,3 +117,5 @@ translation quality after being trained for as littie as twelve hours on eight P
 - factorization tricks 参数分解技巧
 - compelling 令人信服的 引人注目的
 - without regard to 不需要考虑
+- In all but a few cases 除了少数情况
+- in conjunction with 与...一起
