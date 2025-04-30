@@ -19,6 +19,13 @@ https://arxiv.org/pdf/1706.03762
 - 简洁性惩罚 (Brevity Penalty, BP):如果机器翻译的长度显著短于参考翻译的平均长度，BLEU 会施加一个惩罚因子。这是因为单纯追求高精确率可能会导致翻译出非常短但词语都正确的片段，而丢失了原文信息
 
 
+## 编码器解码器架构
+- 编码 (Encoding): 编码器理解并压缩输入序列的信息到一个中间表示（通常是一个或多个向量）。这个中间表示试图捕捉输入序列的关键语义和上下文信息。
+- 解码 (Decoding): 解码器利用编码器产生的中间表示，逐步生成目标输出序列。在生成每个输出符号时，解码器会考虑之前已经生成的符号，从而保持输出序列的连贯性。
+## 自回归？auto-regressive
+- 自回归是生成当前的输出的时候，会依赖于之前的输出
+- 优点：自回归特性使其能够生成具有时间依赖性的序列，能够很好的捕捉序列之间的依赖关系
+- 自回归模型就是当前的值依赖于过去某些时刻的值，也就是用历史的数据来预测当前的数据。在神经网络这块，自回归模型就是生成当前元素的时候，会把前面生成的元素也作为条件，是一个一个生成的，不是一次全部生成
 
 
 # 翻译练习
@@ -119,6 +126,23 @@ To the best of our knowledge, however, the Transformer is the first transduction
 In the following sections, we will describe the Transformer,s motivate self-attention and discuss its advantages over models such as [7, 8] and [].
 ```
 
+
+# 3。Model Architecture
+```
+大多数有竞争力的神经序列转译模型都有一个编码器-解码器结构。
+在这里,attention编码器将一个具有符号表示的输入序列（c1...cn）映射成一个连续的表示序列(z1....zn)。对于z向量，解码器每次生成一个元素的符号输出序列（y1...yn）
+每一步这个模型都是自回归的，在生成下一步时，都会消耗之前产生的符号作为额外的输入。
+
+Most competitive neural sequence transduction models have an encoder-decoder structure [ 2 B5]
+Here, the encoder maps an input sequence of symbol representations (c1, ., &n) to a sequence of continuous representations z =(z1,.., Zn). 
+Given z, the decoder then generates an output sequence (y1, ., ym) of symbols one element at a time. 
+At each step the model is auto-regressive, consuming the previously generated symbols as additional input when generating the next.
+
+
+图 1 的左半部分和右半部分分别显示了编码器和解码器采用堆叠式自关注和点式全连接层的整体架构。
+The Transformer follows this overall architecture using stacked self-attention and point-wise, 
+fully connected layers for both the encoder and decoder, shown in the left and right halves of Figure 1 respectively.
+```
 ## 词汇
 - dominant 主要的，主导的
 - transduction 转换 翻译 转译
