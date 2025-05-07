@@ -127,7 +127,7 @@ In the following sections, we will describe the Transformer,s motivate self-atte
 ```
 
 
-# 3。Model Architecture
+### 3。Model Architecture
 ```
 大多数有竞争力的神经序列转译模型都有一个编码器-解码器结构。
 在这里,attention编码器将一个具有符号表示的输入序列（c1...cn）映射成一个连续的表示序列(z1....zn)。对于z向量，解码器每次生成一个元素的符号输出序列（y1...yn）
@@ -143,6 +143,39 @@ At each step the model is auto-regressive, consuming the previously generated sy
 The Transformer follows this overall architecture using stacked self-attention and point-wise, 
 fully connected layers for both the encoder and decoder, shown in the left and right halves of Figure 1 respectively.
 ```
+
+
+#### 3.1 Encoder and Decoder Stack
+
+编码器 编码器由 N = 6 层相同的层堆叠组成。每一层都有两个子层。
+第一个子层是多头自注意机制，第二个子层是一个简单的、位置明智的全连接前馈网络。
+
+Encoder: The encoder is composed of a stack of N = 6 identical layers. Each layer has two sub-layers. 
+The first is a multi-head self-attention mechanism, and the second is a simple, position - wise fully connected feed-forward network. 
+
+我们在两个子层的周围使用了一个残差连接，然后进行层规范化，
+那也就是说，每一个子层的输出都是一个LayerNorm(c + Sublayer(α)
+其中Sublayer(c)是子层本身实现的函数。
+
+为了更好促进这些残差连接，这个模型里所有的子层 包括嵌入层，全部产生维度为512的输出
+
+We employ a residual connection [] around each of the two sub-layers, followed by layer normalization.
+That is, the output of each sub-layer is LayerNorm(c + Sublayer(c)), where Sublayer(c) is the function implemented by the sub-layer itself. 
+
+To facilitate these residual connections, all sub-layers in the model, as well as the embedding layers, produce outputs of dimension dmodel = 512.
+
+解码器，解码器也是由N = 6 层相同的层堆叠组成。
+
+Decoder:  The decoder is also composed of a stack of N = 6 identical layers.-
+kIn addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer, which performs multi-head
+attention over the output of the encoder stack. 
+Similar to the encoder, we employ residual connections
+around each of the sub-layers, followed by layer normalization. We also modify the self-attention
+sub-layer in the decoder stack to prevent positions from attending to subsequent positions. This
+masking, combined with fact that the output embeddings are offset by one position, ensures that the
+predictions for position i can depend only on the known outputs at positions less than i.
+
+
 ## 词汇
 - dominant 主要的，主导的
 - transduction 转换 翻译 转译
@@ -177,4 +210,7 @@ fully connected layers for both the encoder and decoder, shown in the left and r
 - in conjunction with 与...一起
 - language modeling tasks 语言建模任务
 - to the best of our knowledge 据我们所知
-- motivate 激励激发 动机
+- motivate 激励激发 动机    
+- residual connection 残差连接
+- employ使用
+- identical 相同的
